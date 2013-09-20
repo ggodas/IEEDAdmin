@@ -1,0 +1,59 @@
+﻿@model SoftSize.Ieed.ViewModels.PesquisaDeAssociadosViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Titulo</h2>
+@section scripts{
+    $(function () {
+
+
+        $("#txtSearch").focus(function () {
+            if ($(this).val() == 'Encontre aqui...')
+                $(this).val("");
+        });
+
+        $("#txtSearch").blur(function () {
+            if ($(this).val() == "")
+                $(this).val("Encontre aqui...");
+        });
+
+        function log(message, id) {
+            $.blockUI({ message: 'Aguarde...'});
+            window.location = '@Model.Url' + message.id;
+        }
+
+        $('#txtSearch').autocomplete({
+            minLength: 2,
+            delay: 500,
+            scroll: true,
+            select: function (event, ui) {
+                log(ui.item, ui);
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Content("~/Associado/ProcurarAssociadoPor")',
+                    type: 'Get',
+                    dataType: "json",
+                    data: {
+                        nome: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Nome,
+                                value: '',
+                                id: item.Id
+                            }
+                        }))
+                    }
+                })
+            }
+        })
+    });
+}
+<fieldset>
+    <legend>Pesquisa de Associados:</legend>
+    <label for="txtSearch">@Model.Label</label>
+    <input type="text" id="txtSearch" class="input-box" style="width: 300px;" value="Encontre aqui..." />
+</fieldset>

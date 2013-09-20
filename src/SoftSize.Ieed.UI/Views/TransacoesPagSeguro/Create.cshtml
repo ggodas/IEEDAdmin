@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+<form target="pagseguro" action="http://localhost:9090/security/webpagamentos/webpagto.aspx" method="post">
+<input type="hidden" name="receiverEmail" value="seu_email@loja_modelo.com" />
+<input type="hidden" name="currency" value="BRL" />
+<input type="hidden" name="itemId" value="12" />
+<input type="hidden" name="itemDescription" value="Produto de exemplo" />
+<input type="hidden" name="itemQuantity" value="1" />
+<input type="hidden" name="itemAmount" value="40.00" />
+<input type="hidden" name="itemWeight" value="" />
+<input type="hidden" name="itemShippingCost" value="0.00" />
+<input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-comprar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+<input type="submit" />
+</form>

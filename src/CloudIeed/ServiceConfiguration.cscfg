@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CloudIeed" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*">
+  <Role name="SoftSize.Ieed.UI">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="ggodas" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEAQvv0WBDKWaSAx7e9D1WWEwDQYJKoZIhvcNAQEBBQAEggEA1BZZ49aJJntyiJHJQ99cys1mWptMqpXRiluqk5VgsaTVMI7x7/ZcQD+wxvKUyO6WY0CbekH2ZSc65kbcEmD9mMkzf7Uij55lfe0f9nGJkxguX4/LH29z+P9Tab4InZjFn42ZF/dRpht9s/W7/rcBxY2QgRQxKd50aYWEkWm3xcwmMGvDyhHmkc3dqkVDcXMHXnKWqvsPh85wmbY1IqmHWcFLEeiHETsdm8e5MNMfiz5C5icgC8TWZcs/aq0vKzylpKOayIt2Vc/AbhhIhAkfbMww3uzJdWWSWNM9IB66ssZyAamEg3XTuWUA5d+DkAcpsFw88cKU3JeVCY/m4j3USDAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECKOTwpVHe9d8gBCg8MTbB/c3O0gm6XtkMhW+" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2011-06-30T23:59:59.0000000-03:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="1C940CD1D2D7FEA88595108629714371B2B67EB3" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

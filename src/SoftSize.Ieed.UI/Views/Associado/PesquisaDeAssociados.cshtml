@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Pesquisa de Associados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Pesquisa de Associados</h2>
+
+<script>
+    $(function () {
+
+
+        $("#txtSearch").focus(function () {
+            if ($(this).val() == 'Encontre aqui...')
+                $(this).val("");
+        });
+
+        $("#txtSearch").blur(function () {
+            if ($(this).val() == "")
+                $(this).val("Encontre aqui...");
+        });
+
+
+        function log(message, id) {
+            window.location = '@Url.Content("~/Associado/Edit?idAssociado=")' + message.id;
+        }
+
+        $('#txtSearch').autocomplete({
+            minLength: 2,
+            delay: 500,
+            scroll: true,
+            select: function (event, ui) {
+                log(ui.item, ui);
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Content("~/Associado/ProcurarAssociadoPor")',
+                    type: 'Get',
+                    dataType: "json",
+                    data: {
+                        nome: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Nome,
+                                value: '',
+                                id: item.Id
+                            }
+                        }))
+                    }
+                })
+            }
+        })
+    });
+
+</script>
+<fieldset>
+    <legend>Pesquisa de Associados:</legend>
+    <input type="text" id="txtSearch" class="input-box" value="Encontre aqui..." />
+</fieldset>

@@ -1,0 +1,26 @@
+﻿@model SoftSize.Ieed.UI.Models.LogOnModel
+@{
+    ViewBag.Title = "Log On";
+}
+<h2>
+    Login</h2>
+<p>
+    Insira seu login e senha para entrar. Caso ainda não seja um usuário registrado,
+    <b>@Html.ActionLink("Registre-se", "Register", "Account").</b>
+</p>
+@Html.ValidationSummary(true, "Não foi possível realizar o login, por favor tente novamente.", new { @class = "message-validator" })
+@using (Html.BeginForm("LogOn", "Account"))
+{
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName, new { @class = "input-box" })
+    @Html.ValidationMessageFor(m => m.UserName, null,  new { @class = "message-validator" })
+    @Html.LabelFor(m => m.Password)
+    @Html.PasswordFor(m => m.Password, new { @class = "input-box" })
+    @Html.ValidationMessageFor(m => m.Password, null,  new { @class = "message-validator" })
+    @Html.LabelFor(m => m.RememberMe)
+    @Html.CheckBoxFor(m => m.RememberMe)
+    
+    <p>
+        <input type="submit" value="Entrar" />
+    </p>
+}

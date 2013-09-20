@@ -1,0 +1,10 @@
+﻿@model SoftSize.Ieed.ViewModels.AssociadoModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Criação de Novos Associados</h2>
+
+    @{Html.RenderPartial("~/Views/Associado/Associado.cshtml", ViewData.Model);}
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    @{
+        SquishIt.Framework.Bundle.JavaScript()
+            .Add(Url.Content("~/Scripts/jquery-1.6.4.js"))
+            .Add(Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js"))
+            .Add(Url.Content("~/Scripts/ui/jquery-ui-1.8.11.custom.js"))
+            .Add(Url.Content("~/Scripts/ui/jquery.ui.autocomplete.js"))
+            .Add(Url.Content("~/Scripts/jquery.meio.mask.js"))
+            .Add(Url.Content("~/Scripts/jquery.global.js"))
+            .Add(Url.Content("~/Scripts/jquery.ui.datepicker-pt-BR.js"))
+            .Add(Url.Content("~/Scripts/jquery.blockUI.js"))
+            .Add(Url.Content("~/Scripts/jquery.tokeninput.js"))
+            .ForceRelease()
+            .Render("/Scripts/Client.min.js");
+
+        SquishIt.Framework.Bundle.Css()
+            .Add(Url.Content("~/Content/Site.css"))
+            .Add(Url.Content("~/Content/token-input.css"))
+            .Add(Url.Content("~/Content/themes/redmond/jquery.ui.theme.css"))
+            .Add(Url.Content("~/Content/themes/redmond/jquery.ui.datepicker.css"))
+            .ForceRelease()
+            .Render("~/Content/themes/base/style.min.css");
+        
+     }
+    <link href="@Url.Content("~/Content/themes/base/style.min.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("declarationStyles", required:false)
+    <script src="@Url.Content("~/Scripts/Client.min.js")" type="text/javascript"></script>
+    @RenderSection("declarationScripts", required:false)
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="description" content="Description of your web page goes here." />
+    <meta name="keywords" content="Keywords for you web page go here. Each keyword or group of keyword phrases are separated by a comma. Keep this  list short and relevant to the content and title of this specific page." />
+    <script type="text/javascript">
+        $(function () {
+            $("button, input:submit").button();
+        });
+    </script>
+</head>
+<body>
+    <div class="none">
+        <a href="#maincontent">skip to the main content area of this page</a></div>
+    <div class="header-container">
+        <div class="nav-login">
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="first">@Html.ActionLink("Sair", "LogOff", "Account")</li>
+                }
+            </ul>
+        </div>
+        <div class="logo">
+            <a href="@Url.Action("Index", "Home")">IEED - Administração</a></div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="poster-container-no-image">
+        <div class="poster-inner">
+        </div>
+    </div>
+    <div class="nav-main">
+        <ul>
+            @*         @if (Html.("Index", "Home")) 
+          {
+            <li class="first active"><span class="active"></span>Html.ActionLink("Home", "Index", "Home")</li>
+          } 
+          else 
+          {
+            <li class="first">@Html.ActionLink("Home", "Index", "Home")</li>
+          }
+
+          @if (Html.IsCurrentAction("About", "Home")) {
+            <li class="active"><span class="active"></span>@Html.ActionLink("About", "About", "Home")</li>
+              }
+              else 
+              {
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+          }
+*@
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="content-container-inner">
+            <div class="content-main">
+                <a name="maincontent" id="maincontent"></a>
+                <div class="breadcrumb">
+                    <a href="home.html">Home</a> &raquo; this page title</div>
+                @RenderBody()
+            </div>
+            <div class="content-left">
+                <div class="side-bucket">
+                    @{Html.RenderPartial("MenuEsquerdo");}
+                </div>
+            </div>
+            <div class="content-right">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    { Html.RenderPartial("~/Views/Account/LogOn.cshtml", new SoftSize.Ieed.UI.Models.LogOnModel()); }
+                }
+@*                <div class="ads">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/images/ad.gif")" alt="ad" /></a>
+                </div>*@
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="nav-footer">
+            <ul>
+                <li class="first">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+            </ul>
+            <p class="copyright">
+                &copy; Powered by SoftSize</p>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    @RenderSection("scripts", required:false)
+</script>

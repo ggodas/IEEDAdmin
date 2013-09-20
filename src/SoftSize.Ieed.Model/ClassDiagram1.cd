@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoCerimonia">
+    <Position X="0.75" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\LancamentoCerimonia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoDoacao">
+    <Position X="6.25" Y="8.25" Width="2.5" />
+    <AssociationLine Name="Usuario" Type="SoftSize.Ieed.Model.UsuarioModel.Usuario" ManuallyRouted="true">
+      <Path>
+        <Point X="6.25" Y="8.866" />
+        <Point X="6.052" Y="8.866" />
+        <Point X="6.052" Y="3.875" />
+        <Point X="1.25" Y="3.875" />
+        <Point X="1.25" Y="3.983" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\LancamentoDoacao.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Caixa.MovimentoDeCaixa">
+    <Position X="12.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgQAQAAAAAAAABAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Caixa\MovimentoDeCaixa.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LancamentoBase" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Caixa.MovimentoDeCaixaCredito">
+    <Position X="15" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Caixa\MovimentoDeCaixaCredito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Caixa.MovimentoDeCaixaDebito">
+    <Position X="11.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Caixa\MovimentoDeCaixaDebito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade">
+    <Position X="3.25" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\LancamentoMensalidade.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Associado" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Conta.ContaCorrente">
+    <Position X="10" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Conta\ContaCorrente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Conta.DebitoContaCorrente">
+    <Position X="8.5" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Conta\DebitoContaCorrente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Conta.CreditoContaCorrente">
+    <Position X="12" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Conta\CreditoContaCorrente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoDespesa">
+    <Position X="9" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\LancamentoDespesas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.UsuarioModel.Associado">
+    <Position X="0.5" Y="4.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACAAAAAEBAAAFAAAAAAAAAAAAAAAAAIAQAUAA=</HashCode>
+      <FileName>UsuarioModel\Associado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.CentroDeCustoLancamento">
+    <Position X="11.25" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\CerimoniaDetalhe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.UsuarioModel.Usuario">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACAAAAAAAQEAAAgAACAAAAAAIAAAACEAAAA=</HashCode>
+      <FileName>UsuarioModel\Usuario.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoBase">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAIEAAABABAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\LancamentoBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SoftSize.Ieed.Model.FinanceiroModel.Lancamento.MensalidadeCategoria">
+    <Position X="3.25" Y="11.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FinanceiroModel\Lancamento\MensalidadeCategoria.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,1974 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+################### Exemplo de um List Box com itens fixos #######
+<ControlsInView>
+  <DynamicControlInView>
+    <Id>Funcionario</Id>
+    <Name>Funcionario</Name>
+    <Label>Funcionario</Label>
+    <Type></Type>
+    <TemplateControl>select</TemplateControl>
+    <IsRequired>false</IsRequired>
+    <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+    <OptionList>
+      <Option>
+        <Value>1</Value>
+        <Text>Bla</Text>
+        <Selected>false</Selected>
+      </Option>
+    </OptionList>
+    <OptionList>
+      <Option>
+        <Value>1</Value>
+        <Text>Ble</Text>
+        <Selected>true</Selected>
+      </Option>
+    </OptionList>
+  </DynamicControlInView>
+</ControlsInView>
+###############################################################################
+
+################### Exemplo de um auto complete ###############################
+<ControlsInView>
+      <DynamicControlInView>
+        <Id>Funcionario</Id>
+        <Name>Funcionario</Name>
+        <Type>text</Type>
+        <Label>Funcionario</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <NaoExibirParaOsPerfis>
+          <string>Master BR</string>
+        </NaoExibirParaOsPerfis>
+        <Script>
+          <![CDATA[
+             jQuery(document).ready(function(){
+                jQuery('#Funcionario').autocomplete({
+                    minLength: 2,
+                    delay: 500,
+                    scroll: true,
+                    matchContains: "word",
+                    autoFill: false,
+                    change: function (event, ui) {
+                      alert(ui.item.source.PortId);
+                        if (ui.item) {
+                            $('#Funcionario').val(ui.item.source.PortId);
+                        }
+                        else {
+                                 $(this).val('');
+                                 $('#Funcionario').val('');                    
+ 
+                         }
+                    },
+                    select: function (event, ui) {
+                      log(ui.item.label, ui);
+                    },
+                    source: function (request, response) {
+                        jQuery.ajax({
+                            url: '../../Funcionario/RecuperarFuncionarios',
+                            type: 'Post',
+                            dataType: "json",
+                            data: {
+                                   nome: request.term,
+                                   maxResults: 1000
+                            },
+                    success: function (data) {
+                        response(jQuery.map(data, function (item) {
+                            return {
+                                label: item.Value + ' - ' + item.Text,
+                                value: '',
+                                id: item.Value
+                            }
+                        }))
+                    }
+                  })
+                    }
+                })
+                
+                   function log(message, id) {
+                      alert(id.item.label);
+                  }
+                });
+          ]]>
+        </Script>        
+      </DynamicControlInView>
+    </ControlsInView>
+###############################################################################
+-->
+
+<DynamicViews>
+  <DynamicView>
+    <Id>4D004D5C-5E7F-429D-A68A-37135A128E4B</Id>
+    <Name>George</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Resumo Financeiro</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>COD_R3_POSTO</Id>
+        <Name>COD_R3_POSTO</Name>
+        <Type>hidden</Type>
+        <Label>Revendedor</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>DataDe</Id>
+        <Name>DataDe</Name>
+        <Type>text</Type>
+        <Label>Data Inicial</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DataDe, #DataAte").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+                  numberOfMonths: 2,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DataDe" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>DataAte</Id>
+        <Name>DataAte</Name>
+        <Type>text</Type>
+        <Label>Data Final</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>4D004D5C-5E7F-429D-A68A-37135A128E4B</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>a50f1aee-0723-475a-8b04-ce10ab5ad1cb</Id>
+    <Name>George</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Movimentação de Pontos</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>COD_R3_POSTO</Id>
+        <Name>COD_R3_POSTO</Name>
+        <Type>hidden</Type>
+        <Label>Revendedor</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>Analitico</Id>
+        <Name>Analitico</Name>
+        <Type>checkbox</Type>
+        <Value>true</Value>
+        <Checked>true</Checked>
+        <Label>Analitico</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>DataDe</Id>
+        <Name>DataDe</Name>
+        <Type>text</Type>
+        <Label>Data Inicial</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Data Inicial Requerida</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery( "#DataDe, #DataAte" ).datepicker({
+              defaultDate: "+1w",
+              changeMonth: true,
+              numberOfMonths: 2,
+              onSelect: function( selectedDate ) {
+              var option = this.id == "DataDe" ? "minDate" : "maxDate",
+              instance = jQuery( this ).data( "datepicker" ),
+              date = jQuery.datepicker.parseDate(
+              instance.settings.dateFormat ||
+              jQuery.datepicker._defaults.dateFormat,
+              selectedDate, instance.settings );
+              dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DataAte</Id>
+        <Name>DataAte</Name>
+        <Type>text</Type>
+        <Label>Data Final</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Data Final Requerida</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>Funcionario</Id>
+        <Name>Funcionario</Name>
+        <Label>Funcionario</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <CssClass>comboBox</CssClass>
+        <Multiple>true</Multiple>
+        <!--<Attributes>
+          <string>disabled='disabled'</string>
+        </Attributes>-->
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+                jQuery.ajax({
+                            url: '../../Funcionario/RecuperarFuncionarios',
+                            type: 'Post',
+                            dataType: "json",
+                            success: function (data) {
+                                var gender = data;
+                                if (gender.length > 0) {
+                                    var listItems = [];
+                                    listItems.push('<option selected value="">Todos</option>');
+                                    for (var i = 0; i < gender.length; i++) {
+                                        listItems.push('<option value="' + gender[i].Value + '">' + gender[i].Text + '</option>');
+                                    }
+                                    jQuery('#Funcionario').children().remove();
+                                    jQuery('#Funcionario').removeAttr('disabled');
+                                    jQuery('#Funcionario').append(listItems.join(''));
+                                }
+                                else {
+                                    alert("Nenhum Funcionário Cadastrado");
+                                }
+                            }
+                            })
+              });
+          ]]>
+        </Script>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Aguarde Carregando ...</Text>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>TipoDePonto</Id>
+        <Name>TipoDePonto</Name>
+        <Label>Tipo de Ponto</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Tipo de Ponto Requerido</ErrorMessage>
+        <CssClass>comboBox</CssClass>
+        <Multiple>false</Multiple>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Todos</Text>
+          </Option>
+          <Option>
+            <Value>C</Value>
+            <Text>Distribuido</Text>
+          </Option>
+          <Option>
+            <Value>D</Value>
+            <Text>Resgatado</Text>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>a50f1aee-0723-475a-8b04-ce10ab5ad1cb</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>5D90A357-8F55-4366-9867-4703D93F9B3D</Id>
+    <Name>George</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Registro de Cadastro</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>5D90A357-8F55-4366-9867-4703D93F9B3D</Value>
+        <TemplateControl>input</TemplateControl>
+        <Script>
+          <![CDATA[
+            jQuery('form').submit();
+          ]]>
+        </Script>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>CAD72E47-699E-4C98-A41F-A5DFDF5E7146</Id>
+    <Name>AdesoesRealizadas</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Adesões Realizadas</TitleView>
+    <TitleFilter>Formato</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>radio</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>radio</Type>
+        <Value>EXCEL</Value>
+        <Label>Formato Excel</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>CAD72E47-699E-4C98-A41F-A5DFDF5E7146</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>174D00B7-22FC-4D9D-A189-4D905D0223CB</Id>
+    <Name>ConsultaLogAcessoAdquirencia</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Consulta Log de Acesso Adquirência</TitleView>
+    <TitleFilter>Formato</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>DATADE</Id>
+        <Name>DATADE</Name>
+        <Type>text</Type>
+        <Label>Data Inicial</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DATADE, #DATAATE").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+				          minDate: "11/08/2011",
+				          maxDate: "+0D",
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DATADE" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATAATE</Id>
+        <Name>DATAATE</Name>
+        <Type>text</Type>
+        <Label>Data Final</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>radio</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>radio</Type>
+        <Value>EXCEL</Value>
+        <Label>Formato Excel</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>174D00B7-22FC-4D9D-A189-4D905D0223CB</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+
+  <DynamicView>
+    <Id>0DC49A14-0D73-470C-A9FD-03B3F0C8C79A</Id>
+    <Name>InformacoesMarketingAdesoesRealizadas</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Informações Marketing das Adesões Realizadas</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>ShowPersolizado</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>0DC49A14-0D73-470C-A9FD-03B3F0C8C79A</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>GAT</Id>
+        <Name>GAT</Name>
+        <Type>text</Type>
+        <Label>Nome do GAT</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GAT requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>GRP</Id>
+        <Name>GRP</Name>
+        <Type>text</Type>
+        <Label>Nome do GRP</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GRP requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+          <string>GAT</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>ZONA_VENDA</Id>
+        <Name>ZONA_VENDA</Name>
+        <Type>text</Type>
+        <Label>Nome Zona Venda</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo Nome da Zona de Venda requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+          <string>GAT</string>
+          <string>GRP</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>COD_R3_POSTO</Id>
+        <Name>COD_R3_POSTO</Name>
+        <Type>text</Type>
+        <Label>Cód. R3</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo Cód. R3 requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>TIPO_TAXA</Id>
+        <Name>TIPO_TAXA</Name>
+        <Label>Tipo Taxa</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Selecione um tipo de taxa</ErrorMessage>
+        <Script>
+          <![CDATA[
+                  jQuery('.CampoNumeric').live('keyup', function(e) {
+                    jQuery(this).val(jQuery(this).val().replace(/[^0-9,]/g, ''));
+                  });
+
+                  jQuery('.CampoNumeric').live('keypress', function(e){
+                    jQuery(this).val(jQuery(this).val().replace(/[^0-9,]/g, ''));
+                  });
+
+
+                  jQuery(":submit").click(function() {
+                    if (jQuery('#TIPO_TAXA').val() != '')
+                    {
+                      if (jQuery('#VALOR_TAXA_DE').val() == '' || jQuery('#VALOR_TAXA_ATE').val() == ''){
+                        alert('Valor das taxas inválidas.');
+                        return false;
+                      }
+                    }
+                  });
+          ]]>
+        </Script>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>selecione</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>1</Value>
+            <Text>crédito</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>2</Value>
+            <Text>débito</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>3</Value>
+            <Text>parcelado</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>TIPO_BANDEIRA</Id>
+        <Name>TIPO_BANDEIRA</Name>
+        <Label>Tipo Bandeira</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Selecione um tipo de bandeira</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Todas</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>1</Value>
+            <Text>Visa</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>2</Value>
+            <Text>MasterCard</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>3</Value>
+            <Text>Diners</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>VALOR_TAXA_DE</Id>
+        <Name>VALOR_TAXA_DE</Name>
+        <Type>text</Type>
+        <Label>Taxa De</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa De" requerido</ErrorMessage>
+        <CssClass>CampoNumeric</CssClass>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>VALOR_TAXA_ATE</Id>
+        <Name>VALOR_TAXA_ATE</Name>
+        <Type>text</Type>
+        <Label>Taxa Até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa Até" requerido</ErrorMessage>
+        <CssClass>CampoNumeric</CssClass>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_ADESAO_DE</Id>
+        <Name>DATA_ADESAO_DE</Name>
+        <Type>text</Type>
+        <Label>Data de Adesão de</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DATA_ADESAO_DE, #DATA_ADESAO_ATE").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+				          minDate: "01/08/2011",
+				          maxDate: "+0D",
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DATA_ADESAO_DE" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_ADESAO_ATE</Id>
+        <Name>DATA_ADESAO_ATE</Name>
+        <Type>text</Type>
+        <Label>Data de Adesão até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DSC_CIDADE</Id>
+        <Name>DSC_CIDADE</Name>
+        <Type>text</Type>
+        <Label>Cidade</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa Visa Crédito à Vista Até" requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_INSTALACAO_DE</Id>
+        <Name>DATA_INSTALACAO_DE</Name>
+        <Type>text</Type>
+        <Label>Data de Instalação de</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DATA_INSTALACAO_DE, #DATA_INSTALACAO_ATE").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+				          minDate: "01/08/2011",
+				          maxDate: "+0D",
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DATA_INSTALACAO_DE" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_INSTALACAO_ATE</Id>
+        <Name>DATA_INSTALACAO_ATE</Name>
+        <Type>text</Type>
+        <Label>Data de Instalação até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>COMBO_FILTRO</Id>
+        <Name>COMBO_FILTRO</Name>
+        <Type></Type>
+        <Label>Lembretes de Filtros</Label>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GAT requerido</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Selecione</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+                jQuery.ajax({
+                  url: '/DynamicViews/RecuperarFiltros',
+                  context: document.body,
+                  dataType: 'json',
+                  type: 'Post',
+                  data: {
+                        q: jQuery('#Id').val()
+                  },
+                  success: function(data) {
+                    jQuery.each(data, function(Id, Nome){
+                      jQuery('#COMBO_FILTRO').append(jQuery("<option></option>").val(Nome.Id).html(Nome.Nome));
+                    });
+                  },
+                  error: function() { alert("Ocorreu um erro ao carregar os filtros."); }
+                });
+                
+                jQuery('#COMBO_FILTRO').change(function() {
+                    jQuery.ajax({
+                      url: '/DynamicViews/RecuperarItensFiltro',
+                      context: document.body,
+                      dataType: 'json',
+                      type: 'Post',
+                      async: false,
+                      data: {
+                            q: jQuery(this).val()
+                      },
+                      success: function(data) {
+                        jQuery.each(data, function(Key, Value){
+                          jQuery('#' + Value.Key).val(Value.Value);
+                          if(Value.Key == 'camposSelecionados'){
+                            AlterarCamposSelecionados();
+                          }
+                          
+                        });
+                     }
+                    });
+                });
+
+                  jQuery(":submit").click(                  
+                    function() {
+                    jQuery.ajax({
+                      url: '/DynamicViews/InserirFiltro',
+                      context: document.body,
+                      dataType: 'json',
+                      type: 'Post',
+                      data: jQuery(":input"),
+                      success: function(data) {
+                        jQuery.each(data, function(Key, Value){
+                          jQuery('#' + Value.Key).val(Value.Value);
+                        });
+                     }
+                    });
+                  });
+
+
+
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>NOME_FILTRO</Id>
+        <Name>NOME_FILTRO</Name>
+        <Type>text</Type>
+        <Label>Nome do Filtro (caso deseje salvar o filtro insira um nome)</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Nome do Filtro</ErrorMessage>
+        <Attributes>
+          <string>maxLength='50'</string>
+        </Attributes>
+        <Script>
+          <![CDATA[
+            jQuery('#NOME_FILTRO').live('keyup', function(e) {
+              jQuery(this).val(jQuery(this).val().replace(/[^a-zA-Z0-9 ,.]/g, ''));
+            });
+
+            jQuery('#NOME_FILTRO').live('keypress', function(e){
+              jQuery(this).val(jQuery(this).val().replace(/[^a-zA-Z0-9 ,.]/g, ''));
+            });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>ListaSelecaoColuna</Id>
+        <Name>ListaSelecaoColuna</Name>
+        <Type></Type>
+        <Label>Seleção de Coluna</Label>
+        <TemplateControl>listaSelecaoColuna</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Selecione alguma coluna para filtrar o relatório</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value>DSC_GAT</Value>
+            <Text>GAT</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_GRP</Value>
+            <Text>GRP</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_ZONA_VENDA</Value>
+            <Text>Zona de Venda</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>COD_R3_POSTO</Value>
+            <Text>Cód R3</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_RAZAO_SOCIAL</Value>
+            <Text>Razão Social</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_CNPJ</Value>
+            <Text>CNPJ</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_MUNICIPIO</Value>
+            <Text>Municipio</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_ESTADO</Value>
+            <Text>UF</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DAT_ADESAO_POSTO</Value>
+            <Text>Data Adesão</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DAT_ENVIO_CIELO</Value>
+            <Text>Data Envio Cielo</Text>
+          </Option>
+          <Option>
+            <Value>SITUACAO</Value>
+            <Text>Situação</Text>
+          </Option>
+          <Option>
+            <Value>FLG_PIM</Value>
+            <Text>PIM</Text>
+          </Option>
+          <Option>
+            <Value>DAT_HABILITACAO_TAXAS</Value>
+            <Text>Data Hab. Taxas</Text>
+          </Option>
+          <Option>
+            <Value>DAT_INSTALACAO_TAXAS</Value>
+            <Text>Data Inst. Taxas</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_CREDITO_VISTA</Value>
+            <Text>Prazo Master Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_DEBITO_VISTA</Value>
+            <Text>Prazo Master Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Master Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_CREDITO_VISTA</Value>
+            <Text>Taxa Master Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_DEBITO_VISTA</Value>
+            <Text>Taxa Master Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Master Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_CREDITO_VISTA</Value>
+            <Text>Prazo Visa Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_DEBITO_VISTA</Value>
+            <Text>Prazo Visa Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_CREDITO_VISTA</Value>
+            <Text>Taxa Visa Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_DEBITO_VISTA</Value>
+            <Text>Taxa Visa Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_DINERS_CREDITO_VISTA</Value>
+            <Text>Prazo Diners Créd. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_DINERS_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Diners Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_DINERS_CREDITO_VISTA</Value>
+            <Text>Taxa Diners Créd. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_DINERS_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Diners Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_SPOT_PROPOSTA</Value>
+            <Text>Taxa ARV SPOT</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_ARV</Value>
+            <Text>Taxa ARV Automático</Text>
+          </Option>
+          <Option>
+            <Value>IND_PERIODO</Value>
+            <Text>IND PERIODO</Text>
+          </Option>
+          <Option>
+            <Value>DSC_DIA_DA_SEMANA</Value>
+            <Text>Dia da Semana</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_1</Value>
+            <Text>Num dia 1</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_2</Value>
+            <Text>Num dia 2</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_3</Value>
+            <Text>Num dia 3</Text>
+          </Option>
+        </OptionList>
+        <Script>
+          <![CDATA[
+              jQuery(function () {
+                  jQuery("ul.droptrue").sortable({
+                      connectWith: "ul"
+                  });
+
+                  jQuery("ul.dropfalse").sortable({
+                      connectWith: "ul"
+                  });
+
+                  jQuery("#sortable1, #sortable2").disableSelection();
+              });
+
+              jQuery("#sortable2").bind("sortupdate", function (event, ui) {
+                  var result = jQuery('#sortable2').sortable('toArray');
+                  //camposSelecionados.value = result;
+                  jQuery("#camposSelecionados").val(result);
+              });
+              
+              function marcaTodas() {
+                  var colunas = jQuery('#sortable1').sortable('toArray');
+                  //jQuery("#camposSelecionados").val( jQuery('#sortable1').sortable('toArray').toLocaleString() );
+                  
+                  jQuery.each(colunas, function (item) {
+                      jQuery('#sortable2').append(jQuery('#' + colunas[item]));
+                  });
+                  jQuery("#camposSelecionados").val( jQuery('#sortable2').sortable('toArray') )
+              }
+
+              function desmarcaTodas() {
+                  var colunas = jQuery('#sortable2').sortable('toArray');
+                 
+                  jQuery("#camposSelecionados").val('')
+                  
+                  jQuery.each(colunas, function (item) {
+                      jQuery('#sortable1').append(jQuery('#' + colunas[item]));
+                  });
+                  //camposSelecionados.value = todas;
+              }
+              
+              jQuery("#sortable2").bind("sortcreate", function (event, ui) {
+                jQuery('#camposSelecionados').val(jQuery('#sortable2').sortable('toArray'));
+              });
+              
+              
+              
+              function AlterarCamposSelecionados() {
+                var result = jQuery('#sortable2').sortable('toArray');
+
+                for (var i in result) {
+                    jQuery('#sortable1').append(jQuery('#' + result[i]));
+                }
+
+                var colunasSalvadas = jQuery('#camposSelecionados').val().toLocaleString();
+                var colunas = colunasSalvadas.replace(';',',').split(',');
+
+                jQuery.each(colunas, function (coluna) {
+                    jQuery('#sortable2').append(jQuery('#' + colunas[coluna]));
+                });
+
+              
+              }
+          ]]>
+        </Script>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView> 
+  <DynamicView>
+    <Id>EB08093F-2DA8-4C37-BACB-D40A4ABF81FD</Id>
+    <Name>InformacoesFinaceirasAdesoesRealizadas</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Informações das Adesões Realizadas</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>ShowPersolizado</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>EB08093F-2DA8-4C37-BACB-D40A4ABF81FD</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>GAT</Id>
+        <Name>GAT</Name>
+        <Type>text</Type>
+        <Label>Nome do GAT</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GAT requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>GRP</Id>
+        <Name>GRP</Name>
+        <Type>text</Type>
+        <Label>Nome do GRP</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GRP requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+          <string>GAT</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>ZONA_VENDA</Id>
+        <Name>ZONA_VENDA</Name>
+        <Type>text</Type>
+        <Label>Nome Zona Venda</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo Nome da Zona de Venda requerido</ErrorMessage>
+        <ExibirSomenteParaOsPerfis>
+          <string>Master BR</string>
+          <string>Gestor BR</string>
+          <string>GAT</string>
+          <string>GRP</string>
+        </ExibirSomenteParaOsPerfis>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>COD_R3_POSTO</Id>
+        <Name>COD_R3_POSTO</Name>
+        <Type>text</Type>
+        <Label>Cód. R3</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo Cód. R3 requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>TIPO_TAXA</Id>
+        <Name>TIPO_TAXA</Name>
+        <Label>Tipo Taxa</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Selecione um tipo de taxa</ErrorMessage>
+        <Script>
+          <![CDATA[
+                  jQuery('.CampoNumeric').live('keyup', function(e) {
+                    jQuery(this).val(jQuery(this).val().replace(/[^0-9,]/g, ''));
+                  });
+
+                  jQuery('.CampoNumeric').live('keypress', function(e){
+                    jQuery(this).val(jQuery(this).val().replace(/[^0-9,]/g, ''));
+                  });
+
+
+                  jQuery(":submit").click(function() {
+                    if (jQuery('#TIPO_TAXA').val() != '')
+                    {
+                      if (jQuery('#VALOR_TAXA_DE').val() == '' || jQuery('#VALOR_TAXA_ATE').val() == ''){
+                        alert('Valor das taxas inválidas.');
+                        return false;
+                      }
+                    }
+                  });
+          ]]>
+        </Script>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>selecione</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>1</Value>
+            <Text>crédito</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>2</Value>
+            <Text>débito</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>3</Value>
+            <Text>parcelado</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>TIPO_BANDEIRA</Id>
+        <Name>TIPO_BANDEIRA</Name>
+        <Label>Tipo Bandeira</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Selecione um tipo de bandeira</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Todas</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>1</Value>
+            <Text>Visa</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>2</Value>
+            <Text>MasterCard</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+        <OptionList>
+          <Option>
+            <Value>3</Value>
+            <Text>Diners</Text>
+            <Selected>false</Selected>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>VALOR_TAXA_DE</Id>
+        <Name>VALOR_TAXA_DE</Name>
+        <Type>text</Type>
+        <Label>Taxa De</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa De" requerido</ErrorMessage>
+        <CssClass>CampoNumeric</CssClass>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>VALOR_TAXA_ATE</Id>
+        <Name>VALOR_TAXA_ATE</Name>
+        <Type>text</Type>
+        <Label>Taxa Até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa Até" requerido</ErrorMessage>
+        <CssClass>CampoNumeric</CssClass>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_ADESAO_DE</Id>
+        <Name>DATA_ADESAO_DE</Name>
+        <Type>text</Type>
+        <Label>Data de Adesão de</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DATA_ADESAO_DE, #DATA_ADESAO_ATE").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+				          minDate: "01/08/2011",
+				          maxDate: "+0D",
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DATA_ADESAO_DE" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_ADESAO_ATE</Id>
+        <Name>DATA_ADESAO_ATE</Name>
+        <Type>text</Type>
+        <Label>Data de Adesão até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DSC_CIDADE</Id>
+        <Name>DSC_CIDADE</Name>
+        <Type>text</Type>
+        <Label>Cidade</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo "Taxa Visa Crédito à Vista Até" requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_INSTALACAO_DE</Id>
+        <Name>DATA_INSTALACAO_DE</Name>
+        <Type>text</Type>
+        <Label>Data de Instalação de</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery("#DATA_INSTALACAO_DE, #DATA_INSTALACAO_ATE").datepicker({
+                  defaultDate: "+1w",
+                  changeMonth: true,
+				          minDate: "01/08/2011",
+				          maxDate: "+0D",
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ) {
+                    var option = this.id == "DATA_INSTALACAO_DE" ? "minDate" : "maxDate",
+                    instance = jQuery( this ).data( "datepicker" ),
+                    date = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings );
+                    dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DATA_INSTALACAO_ATE</Id>
+        <Name>DATA_INSTALACAO_ATE</Name>
+        <Type>text</Type>
+        <Label>Data de Instalação até</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>COMBO_FILTRO</Id>
+        <Name>COMBO_FILTRO</Name>
+        <Type></Type>
+        <Label>Lembretes de Filtros</Label>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Campo GAT requerido</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Selecione</Text>
+            <Selected>true</Selected>
+          </Option>
+        </OptionList>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+                jQuery.ajax({
+                  url: '/DynamicViews/RecuperarFiltros',
+                  context: document.body,
+                  dataType: 'json',
+                  type: 'Post',
+                  data: {
+                        q: jQuery('#Id').val()
+                  },
+                  success: function(data) {
+                    jQuery.each(data, function(Id, Nome){
+                      jQuery('#COMBO_FILTRO').append(jQuery("<option></option>").val(Nome.Id).html(Nome.Nome));
+                    });
+                  },
+                  error: function() { alert("Ocorreu um erro ao carregar os filtros."); }
+                });
+                
+                jQuery('#COMBO_FILTRO').change(function() {
+                    jQuery.ajax({
+                      url: '/DynamicViews/RecuperarItensFiltro',
+                      context: document.body,
+                      dataType: 'json',
+                      type: 'Post',
+                      async: false,
+                      data: {
+                            q: jQuery(this).val()
+                      },
+                      success: function(data) {
+                        jQuery.each(data, function(Key, Value){
+                          jQuery('#' + Value.Key).val(Value.Value);
+                          if(Value.Key == 'camposSelecionados'){
+                            AlterarCamposSelecionados();
+                          }
+                          
+                        });
+                     }
+                    });
+                });
+
+
+                  jQuery(":submit").click(function() {
+                    jQuery.ajax({
+                      url: '/DynamicViews/InserirFiltro',
+                      context: document.body,
+                      dataType: 'json',
+                      type: 'Post',
+                      data: jQuery(":input"),
+                      success: function(data) {
+                        jQuery.each(data, function(Key, Value){
+                          jQuery('#' + Value.Key).val(Value.Value);
+                        });
+                     }
+                    });
+                  });
+
+
+
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>NOME_FILTRO</Id>
+        <Name>NOME_FILTRO</Name>
+        <Type>text</Type>
+        <Label>Nome do Filtro (caso deseje salvar o filtro insira um nome)</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Nome do Filtro</ErrorMessage>
+        <Attributes>
+          <string>maxLength='50'</string>
+        </Attributes>
+        <Script>
+          <![CDATA[
+            jQuery('#NOME_FILTRO').live('keyup', function(e) {
+              jQuery(this).val(jQuery(this).val().replace(/[^a-zA-Z0-9 ,.]/g, ''));
+            });
+
+            jQuery('#NOME_FILTRO').live('keypress', function(e){
+              jQuery(this).val(jQuery(this).val().replace(/[^a-zA-Z0-9 ,.]/g, ''));
+            });
+          ]]>
+        </Script>
+      </DynamicControlInView>      
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>ListaSelecaoColuna</Id>
+        <Name>ListaSelecaoColuna</Name>
+        <Type></Type>
+        <Label>Seleção de Coluna</Label>
+        <TemplateControl>listaSelecaoColuna</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Selecione alguma coluna para filtrar o relatório</ErrorMessage>
+        <OptionList>
+          <Option>
+            <Value>DSC_GAT</Value>
+            <Text>GAT</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_GRP</Value>
+            <Text>GRP</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_ZONA_VENDA</Value>
+            <Text>Zona de Venda</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>COD_R3_POSTO</Value>
+            <Text>Cod. R3</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_RAZAO_SOCIAL</Value>
+            <Text>Razão Social</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>Textbox12</Value>
+            <Text>CNPJ</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_MUNICIPIO</Value>
+            <Text>Cidade</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DSC_ESTADO</Value>
+            <Text>UF</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DAT_ADESAO_POSTO</Value>
+            <Text>Data Adesão</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DAT_ENVIO_CIELO</Value>
+            <Text>Data Envio Cielo</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>NUM_EC_CIELO</Value>
+            <Text>EC Cielo</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>SITUACAO</Value>
+            <Text>Situação</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>FLG_PIM</Value>
+            <Text>PIM</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>FLG_ERA_ATIVO_CIELO</Value>
+            <Text>Era Ativo Cielo</Text>
+            <Selected>true</Selected>
+          </Option>
+          <Option>
+            <Value>DAT_HABILITACAO_TAXAS</Value>
+            <Text>Data Habilitação Taxas</Text>
+          </Option>
+          <Option>
+            <Value>DAT_INSTALACAO</Value>
+            <Text>Data Instalação</Text>
+          </Option>
+          <Option>
+            <Value>CIELO_CREDITO</Value>
+            <Text>Fat. Crédito Cielo jun/11</Text>
+          </Option>
+          <Option>
+            <Value>CIELO_VISTA</Value>
+            <Text>Fat. Débito Cielo jun/11</Text>
+          </Option>
+          <Option>
+            <Value>CIELO_PARCELADO</Value>
+            <Text>Fat. Parcelado Cielo jun/11</Text>
+          </Option>
+          <Option>
+            <Value>FAT_POTENCIAL_ESTIMADO_CREDITO</Value>
+            <Text>Fat. Potencial Estimado Credito</Text>
+          </Option>
+          <Option>
+            <Value>FAT_POTENCIAL_ESTIMADO_DEBITO</Value>
+            <Text>Fat. Potencial Estimado Debito</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_CIELO_MASTERCARD_CREDITO_A_VISTA</Value>
+            <Text>Prazo Cielo Mastercard Crédito</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_CIELO_MASTERCARD_PARCELADO_LOJA</Value>
+            <Text>Prazo Cielo Mastercard Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_MASTERCARD_CREDITO_A_VISTA</Value>
+            <Text>Taxa Cielo Mastercard Crédito</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_MAESTRO_DEBITO_A_VISTA</Value>
+            <Text>Taxa Cielo  Maestro  Débito</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_MASTERCARD_PARCELADO_LOJA</Value>
+            <Text>Taxa Cielo Mastercard Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_CIELO_VISA_CREDITO_A_VISTA</Value>
+            <Text>Prazo Cielo Visa Credito</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_CIELO_VISA_PARCELADO_LOJA</Value>
+            <Text>Prazo Cielo Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_VISA_CREDITO_A_VISTA</Value>
+            <Text>Taxa Cielo Visa Crédito</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_VISA_ELECTRON_DEBITO_A_VISTA</Value>
+            <Text>Taxa Cielo Visa Débito</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_CIELO_VISA_PARCELADO_LOJA</Value>
+            <Text>Taxa Cielo Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_CREDITO_VISTA</Value>
+            <Text>Prazo Master Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_DEBITO_VISTA</Value>
+            <Text>Prazo Master Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_MASTERCARD_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Master Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_CREDITO_VISTA</Value>
+            <Text>Taxa Master Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_DEBITO_VISTA</Value>
+            <Text>Taxa Master Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_MASTERCARD_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Master Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_CREDITO_VISTA</Value>
+            <Text>Prazo Visa Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_DEBITO_VISTA</Value>
+            <Text>Prazo Visa Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_VISA_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_CREDITO_VISTA</Value>
+            <Text>Taxa Visa Cred. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_DEBITO_VISTA</Value>
+            <Text>Taxa Visa Deb. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_VISA_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Visa Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_DINERS_CREDITO_VISTA</Value>
+            <Text>Prazo Diners Créd. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>NUM_PRAZO_DINERS_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Prazo Diners Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_DINERS_CREDITO_VISTA</Value>
+            <Text>Taxa Diners Créd. à Vista</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_DINERS_CREDITO_PARCELADO_LOJA</Value>
+            <Text>Taxa Diners Parcelado</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_SPOT_PROPOSTA</Value>
+            <Text>Taxa ARV SPOT</Text>
+          </Option>
+          <Option>
+            <Value>VLR_TAXA_ARV</Value>
+            <Text>Taxa ARV Automático</Text>
+          </Option>
+          <Option>
+            <Value>IND_PERIODO</Value>
+            <Text>ARV Frequência</Text>
+          </Option>
+          <Option>
+            <Value>DSC_DIA_DA_SEMANA</Value>
+            <Text>ARV Dia da Semana</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_1</Value>
+            <Text>Num dia 1</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_2</Value>
+            <Text>Num dia 2</Text>
+          </Option>
+          <Option>
+            <Value>NUM_DIA_3</Value>
+            <Text>Num dia 3</Text>
+          </Option>
+          <Option>
+            <Value>DIFERENCA_MDR</Value>
+            <Text>Diferença MDR</Text>
+          </Option>
+          <Option>
+            <Value>DIFERENCA_ALUGUEL</Value>
+            <Text>Diferença Aluguel</Text>
+          </Option>
+          <Option>
+            <Value>DIFERENCA_TOTAL</Value>
+            <Text>Diferença Total</Text>
+          </Option>
+        </OptionList>
+        <Script>
+          <![CDATA[
+              jQuery(function () {
+                  jQuery("ul.droptrue").sortable({
+                      connectWith: "ul"
+                  });
+
+                  jQuery("ul.dropfalse").sortable({
+                      connectWith: "ul"
+                  });
+
+                  jQuery("#sortable1, #sortable2").disableSelection();
+              });
+
+              jQuery("#sortable2").bind("sortupdate", function (event, ui) {
+                  var result = jQuery('#sortable2').sortable('toArray');
+                  //camposSelecionados.value = result;
+                  jQuery("#camposSelecionados").val(result);
+              });
+              
+              function marcaTodas() {
+                  var colunas = jQuery('#sortable1').sortable('toArray');
+                  //jQuery("#camposSelecionados").val( jQuery('#sortable1').sortable('toArray').toLocaleString() );
+                  
+                  jQuery.each(colunas, function (item) {
+                      jQuery('#sortable2').append(jQuery('#' + colunas[item]));
+                  });
+                  jQuery("#camposSelecionados").val( jQuery('#sortable2').sortable('toArray') )
+              }
+
+              function desmarcaTodas() {
+                  var colunas = jQuery('#sortable2').sortable('toArray');
+                 
+                  jQuery("#camposSelecionados").val('')
+                  
+                  jQuery.each(colunas, function (item) {
+                      jQuery('#sortable1').append(jQuery('#' + colunas[item]));
+                  });
+                  //camposSelecionados.value = todas;
+              }
+              
+              jQuery("#sortable2").bind("sortcreate", function (event, ui) {
+                jQuery('#camposSelecionados').val(jQuery('#sortable2').sortable('toArray'));
+              });
+              
+              
+              
+              function AlterarCamposSelecionados() {
+                var result = jQuery('#sortable2').sortable('toArray');
+
+                for (var i in result) {
+                    jQuery('#sortable1').append(jQuery('#' + result[i]));
+                }
+
+                var colunasSalvadas = jQuery('#camposSelecionados').val().toLocaleString();
+                var colunas = colunasSalvadas.replace(';',',').split(',');
+
+                jQuery.each(colunas, function (coluna) {
+                    jQuery('#sortable2').append(jQuery('#' + colunas[coluna]));
+                });
+
+              
+              }
+
+              
+              
+          ]]>
+        </Script>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>B7FA736E-8385-44F7-BA9C-227A659342A5</Id>
+    <Name>George</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Horário de Registro de Pontos</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>DataDe</Id>
+        <Name>DataDe</Name>
+        <Type>text</Type>
+        <Label>Data Inicial</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Data Inicial Requerida</ErrorMessage>
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+              var dates = jQuery( "#DataDe, #DataAte" ).datepicker({
+              defaultDate: "+1w",
+              changeMonth: true,
+              numberOfMonths: 2,
+              onSelect: function( selectedDate ) {
+              var option = this.id == "DataDe" ? "minDate" : "maxDate",
+              instance = jQuery( this ).data( "datepicker" ),
+              date = jQuery.datepicker.parseDate(
+              instance.settings.dateFormat ||
+              jQuery.datepicker._defaults.dateFormat,
+              selectedDate, instance.settings );
+              dates.not( this ).datepicker( "option", option, date );
+              }
+              });
+              });
+          ]]>
+        </Script>
+      </DynamicControlInView>
+      <DynamicControlInView>
+        <Id>DataAte</Id>
+        <Name>DataAte</Name>
+        <Type>text</Type>
+        <Label>Data Final</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Data Final Requerida</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>Funcionario</Id>
+        <Name>Funcionario</Name>
+        <Label>Funcionario</Label>
+        <Type></Type>
+        <TemplateControl>select</TemplateControl>
+        <IsRequired>false</IsRequired>
+        <ErrorMessage>Mês e Ano de referência Requerido</ErrorMessage>
+        <CssClass>comboBox</CssClass>
+        <Multiple>true</Multiple>
+        <!--<Attributes>
+          <string>disabled='disabled'</string>
+        </Attributes>-->
+        <Script>
+          <![CDATA[
+              jQuery(document).ready(function(){
+                jQuery.ajax({
+                            url: '../../Funcionario/RecuperarFuncionarios',
+                            type: 'Post',
+                            dataType: "json",
+                            success: function (data) {
+                                var gender = data;
+                                if (gender.length > 0) {
+                                    var listItems = [];
+                                    listItems.push('<option selected value="">Todos</option>');
+                                    for (var i = 0; i < gender.length; i++) {
+                                        listItems.push('<option value="' + gender[i].Value + '">' + gender[i].Text + '</option>');
+                                    }
+                                    jQuery('#Funcionario').children().remove();
+                                    jQuery('#Funcionario').removeAttr('disabled');
+                                    jQuery('#Funcionario').append(listItems.join(''));
+                                }
+                                else {
+                                    alert("Nenhum Funcionário Cadastrado");
+                                }
+                            }
+                            })
+              });
+          ]]>
+        </Script>
+        <OptionList>
+          <Option>
+            <Value></Value>
+            <Text>Aguarde Carregando ...</Text>
+          </Option>
+        </OptionList>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>B7FA736E-8385-44F7-BA9C-227A659342A5</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+  <DynamicView>
+    <Id>03C48314-2841-470B-BFB3-6ADEBE0D039A</Id>
+    <Name>George</Name>
+    <Layout>~/Views/Shared/_Layout.cshtml</Layout>
+    <TitleView>Perfil do Cliente</TitleView>
+    <TitleFilter>Filtros</TitleFilter>
+    <ActionName>Show</ActionName>
+    <ControllerName>Report</ControllerName>
+    <ActionMethod>Post</ActionMethod>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>reportFormat</Id>
+        <Name>reportFormat</Name>
+        <Type>hidden</Type>
+        <Value>HTML</Value>
+        <Checked>true</Checked>
+        <Label>Formato Html</Label>
+        <TemplateControl>input</TemplateControl>
+        <IsRequired>true</IsRequired>
+        <ErrorMessage>Revendedor Requerido</ErrorMessage>
+      </DynamicControlInView>
+    </ControlsInView>
+    <ControlsInView>
+      <DynamicControlInView>
+        <Id>REPORT</Id>
+        <Name>REPORT</Name>
+        <Type>hidden</Type>
+        <Value>03C48314-2841-470B-BFB3-6ADEBE0D039A</Value>
+        <TemplateControl>input</TemplateControl>
+      </DynamicControlInView>
+    </ControlsInView>
+  </DynamicView>
+
+</DynamicViews>

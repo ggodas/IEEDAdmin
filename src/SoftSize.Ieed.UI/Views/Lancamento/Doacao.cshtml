@@ -1,0 +1,45 @@
+﻿@model SoftSize.Ieed.ViewModels.LancamentoModel
+<script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+    $("#example_3").monthpicker("1995-12",callback);
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Associado.Id)
+    <h2>
+        Associado: @Model.Associado.Nome</h2>
+    <fieldset>
+        <legend>Lançamento Manual de Mensalidades</legend>
+        <div>
+            <div>
+                <label>
+                    Ano e Mes de Referência</label>
+            </div>
+            <div>
+                    @Html.DropDownListFor(model => model.CentroDeCustoLancamento.Id,
+                    new SelectList(
+                        Model.CentrosDeCusto, "Id", "Descricao"
+                    ), string.Empty, new { @class = "input-box" , style="width: 300px;" })
+                    @Html.ValidationMessageFor(model => model.CentroDeCustoLancamento.Id)
+            </div>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Valor)<label>(Deixe o valor da mensalidade igual a 0 caso
+                queira que seja incluida uma mensalidade com valor padrão.)</label>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Valor, new { @class = "input-box", style = "width: 300px;" })
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Lista de Lançamentos", "Index", new { @idAssociado = Model.Associado.Id })
+</div>

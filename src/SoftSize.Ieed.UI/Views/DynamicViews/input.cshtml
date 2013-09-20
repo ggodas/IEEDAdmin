@@ -1,0 +1,10 @@
+﻿@model CTF.Fidelidade.Premmia.ViewModel.ViewModels.DynamicControlInView
+@using System.Linq;
+<input type="@Model.Type" @(Model.Checked ? "checked='checked'" : "") value="@Model.Value" id="@(string.IsNullOrEmpty(Model.Id) ? Model.Name : Model.Id)"  name="@(string.IsNullOrEmpty(Model.Name) ? Model.Id : Model.Name)"  @foreach (var attribute in Model.Attributes)
+                                                                                                                                                                                                                                 {@Html.Raw(attribute)} @if (Model.IsRequired)
+                                                                                                                                                                                                                                                                                                     { @Html.Raw("data-val=\"true\" data-val-required=\"" + @Model.ErrorMessage + "\"")} class="@Model.CssClass"/>
+@if (Model.IsRequired)
+{
+    <span class="field-validation-valid" data-valmsg-for="@Model.Name" data-valmsg-replace="true">
+    </span>
+}

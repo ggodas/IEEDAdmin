@@ -1,0 +1,118 @@
+﻿@model SoftSize.Ieed.ViewModels.PagementosSelecionadosModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
+<h2>
+    Caixa
+</h2>
+<script type="text/javascript">
+    $(function () {
+        $('button').click(function () {
+            $('#divFormasPagamento').append('<fieldset style="width: 90%"><div style="display: table;width: 80%;"><select class="input-box cboFormaPagamento"><option value="">Selectione</option><option value="Dinheiro">Dinheiro</option><option value="Cheque">Cheque</option><option value="Cartao">Cartão</option></select><div class="formaPagamento"></div></div></fieldset>');
+            return false;
+        });
+        $('.cboFormaPagamento').change(function () {
+
+
+            var parent = $(this).parent();
+            var formaPagamento = $(parent).find('.formaPagamento');
+            $(formaPagamento).empty();
+
+            switch ($(this).val()) {
+                case "Cheque":
+                    $(formaPagamento).append('<label for="chequeNumero">Numero do Cheque</label><input type="text" class="input-box" id="chequeNumero" /><label for="valorCheque">Valor</label><input type="text" class="input-box" id="valorCheque" />');
+                    break;
+                case "Dinheiro":
+                    $(formaPagamento).append('<label for="dinheiroValor">Valor</label><input type="text" class="input-box" id="dinheiroValor" />');
+                    break;
+                case "Cartao":
+                    $(formaPagamento).append('<label for="cartaoNSU">Cod. Transação</label><input type="text" class="input-box" id="cartaoNSU" /><label for="cartaoValor">Valor</label><input type="text" class="input-box" id="cartaoValor" />');
+                    break;
+            }
+        });
+    });
+</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="data-table">
+    <caption>
+    </caption>
+    <tr>
+        <th scope="col" style="text-align: center">
+            Centro de Custo
+        </th>
+        <th scope="col" style="text-align: center">
+            Tipo de Lançamento
+        </th>
+        <th scope="col" style="text-align: center">
+            Valor
+        </th>
+    </tr>
+    @foreach (var item in Model.PagamentoItens)
+    {
+        <tr class="row-alternating">
+            <td scope="row" style="min-width: 50px; text-align: center">
+                <span>@item.CentroDeCustoLancamento.ToString()</span>
+            </td>
+            <td scope="row" style="min-width: 50px">
+                @item.Tipo
+            </td>
+            <td scope="row" style="width: 100px; text-align: right;">
+                @item.Valor.ToString("C")
+            </td>
+        </tr>
+    }
+    <tr class="row-total">
+        <td scope="row" colspan="1" style="min-width: 50px">
+        </td>
+        <td>
+            Total
+        </td>
+        <td scope="row" style="width: 100px; text-align: right">
+            @Model.RecuperarTotal().ToString("C")
+        </td>
+    </tr>
+</table>
+<br />
+@using (Html.BeginForm("Pagar", "Lancamento"))
+{
+    <div>
+        <div>@Html.Label("NumeroRecibo", "Numero do Recibo")</div>
+        <div>@Html.TextBox("NumeroRecibo", "", new { @class = "input-box", style = "width: 300px;" })</div>
+    </div>
+@*    <button id="btnAdd">
+        Adicionar Forma de Pagamento</button>
+
+    <div id="divFormasPagamento" style="display: table; width: 100%">
+        <fieldset style="width: 90%">
+            <div style="display: table;width: 80%;">
+                <select class="input-box cboFormaPagamento">
+                    <option value="">Selectione</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="Cartao">Cartão</option>
+                </select>
+                <div class="formaPagamento">
+                </div>
+            </div>
+        </fieldset>
+         <fieldset style="width: 90%">
+            <div style="display: table;width: 80%;">
+                <select class="input-box cboFormaPagamento">
+                    <option value="">Selectione</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="Cartao">Cartão</option>
+                </select>
+                <div class="formaPagamento">
+                </div>
+            </div>
+        </fieldset>
+    </div>  
+    <br />
+*@    
+    foreach (var item in Model.PagamentoItens)
+    {
+    <input type="hidden" name="LancamentoModelPagar" value="@item.Id" />
+    }
+    <input type="submit" value="Finalizar Pagamento" />
+}

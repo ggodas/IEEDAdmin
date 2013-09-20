@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D820A3DA-BCBC-4A1E-A642-9BB3F1220ADC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftSize.Ieed.Model</RootNamespace>
+    <AssemblyName>SoftSize.Ieed.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Factory\MovimentoDeCaixaFactory.cs" />
+    <Compile Include="FilterState\Filtro.cs" />
+    <Compile Include="FinanceiroModel\FormasDePagamento\Cheque.cs" />
+    <Compile Include="FinanceiroModel\FormasDePagamento\Dinheiro.cs" />
+    <Compile Include="FinanceiroModel\FormasDePagamento\FormaPagamentoBase.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\CerimoniaDetalhe.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\LancamentoDespesas.cs" />
+    <Compile Include="FinanceiroModel\Conta\CreditoContaCorrente.cs" />
+    <Compile Include="FinanceiroModel\Conta\DebitoContaCorrente.cs" />
+    <Compile Include="FinanceiroModel\Conta\ContaCorrente.cs" />
+    <Compile Include="FinanceiroModel\Caixa\MovimentoDeCaixaCredito.cs" />
+    <Compile Include="FinanceiroModel\Caixa\MovimentoDeCaixaDebito.cs" />
+    <Compile Include="FinanceiroModel\Caixa\MovimentoDeCaixa.cs" />
+    <Compile Include="Factory\UsuarioFactory.cs" />
+    <Compile Include="Factory\LancamentoFactory.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\LancamentoCerimonia.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\LancamentoDoacao.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\LancamentoBase.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\LancamentoMensalidade.cs" />
+    <Compile Include="LogDeAcesso.cs" />
+    <Compile Include="ServiceInterfaces\IAssociadoService.cs" />
+    <Compile Include="ServiceInterfaces\ICredito.cs" />
+    <Compile Include="ServiceInterfaces\IFilterStateService.cs" />
+    <Compile Include="ServiceInterfaces\ILancamentoService.cs" />
+    <Compile Include="ServiceInterfaces\ILogAcessoService.cs" />
+    <Compile Include="ServiceInterfaces\IMovimentoDeCaixaService.cs" />
+    <Compile Include="ServiceInterfaces\IPerfilService.cs" />
+    <Compile Include="ServiceInterfaces\IPermissaoService.cs" />
+    <Compile Include="ServiceInterfaces\IUsuarioService.cs" />
+    <Compile Include="FinanceiroModel\Lancamento\MensalidadeCategoria.cs" />
+    <Compile Include="SSOModel\PerfilDeAcesso.cs" />
+    <Compile Include="SSOModel\Permissao.cs" />
+    <Compile Include="StatusProcessamento.cs" />
+    <Compile Include="UsuarioModel\Associado.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsuarioModel\AssociadoDetalhe.cs" />
+    <Compile Include="UsuarioModel\Endereco.cs" />
+    <Compile Include="UsuarioModel\EstadoCivilEnum.cs" />
+    <Compile Include="UsuarioModel\GrauEspiritual.cs" />
+    <Compile Include="UsuarioModel\Usuario.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftSize.Infrastructure\SoftSize.Infrastructure.csproj">
+      <Project>{1FBB8B80-C22B-4A63-BD23-8ACE7C2E2A21}</Project>
+      <Name>SoftSize.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

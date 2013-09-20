@@ -1,0 +1,60 @@
+﻿@model CTF.Fidelidade.Premmia.ViewModel.ViewModels.DynamicControlInView
+@using System.Linq;
+<script src="@Url.Content("~/Scripts/jquery.ui.core.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.widget.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.mouse.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.sortable.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.js")" type="text/javascript"></script>
+<script>
+    jQuery(function () {
+        jQuery("#accordion").accordion({
+            collapsible: true
+        });
+    });
+
+    jQuery(document).ready(function () {
+        jQuery('#accordion .head').click(function () {
+            jQuery(this).next().toggle('slow');
+            return false;
+        }).next().hide();
+    });
+</script>
+<div id="accordion">
+    <h3>&nbsp;</h3>
+    <div>
+        <div id="colunasDisponiveis" class="colunasDisponiveis">
+            <div class="cabecalhoColunaDiv">
+                Disponíveis</div>
+            <ul id="sortable1" class='droptrue'>
+                @foreach (var item in Model.OptionList.Where(w => w.Selected == false))
+                {
+                    <li id="@string.Format("_l_i_{0}", item.Value)" class="colunaItem">@item.Text</li>    
+                }
+            </ul>
+        </div>
+        <div id="divBotoes">
+            <input type="button" id="btnMarcarTodas" name="btnPassarTodas" value=">>" onclick="javascript:marcaTodas();"
+                class="botao" />
+            <input type="button" id="btnDesmarcarTodas" name="btnVoltarTodas" value="<<" onclick="javascript:desmarcaTodas();"
+                class="botao" />
+        </div>
+        <div id="colunasSelecionadas" class="colunasSelecionadas">
+            <div class="cabecalhoColunaDiv">
+                Selecionadas</div>
+            <ul id="sortable2" class='dropfalse'>
+                @foreach (var item in Model.OptionList.Where(w => w.Selected == true))
+                {
+                    <li id="@string.Format("_l_i_{0}", item.Value)" class="colunaItem">@item.Text</li>    
+                }
+            </ul>
+        </div>
+        <br clear="both" />
+        <input type="hidden" id="camposSelecionados" name="camposSelecionados" @if (Model.IsRequired)
+                                                                               { @Html.Raw("data-val=\"true\" data-val-required=\"" + @Model.ErrorMessage + "\"")} />
+    </div>
+</div>
+@if (Model.IsRequired)
+{
+    <span class="field-validation-valid" data-valmsg-for="camposSelecionados" data-valmsg-replace="true">
+    </span>
+}
