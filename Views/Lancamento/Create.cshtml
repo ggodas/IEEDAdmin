@@ -1,0 +1,104 @@
+﻿@model SoftSize.Ieed.ViewModels.LancamentoModel
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Associado.Id)
+    <h2>
+        Associado: @Model.Associado.Nome</h2>
+    <fieldset>
+        <legend>Lançamento Manual de Mensalidades</legend>
+        <div>
+            <div>
+                <label for="CentroCusto">Centro de Custo</label>
+            </div>
+            <div>
+                    <input type="text" id="CentroCusto" class="input-box" style="width: 300px;" value="Encontre aqui..." />
+                    <input type="hidden" id="CentroDeCustoLancamento_Id" name="CentroDeCustoLancamento.Id" />
+@*                    @Html.DropDownListFor(model => model.CentroDeCustoLancamento.Id,
+                        new SelectList(Model.CentrosDeCusto, "Id", "Descricao"), 
+                        string.Empty, new { @class = "input-box" , style="width: 300px;" })
+*@                    @Html.ValidationMessageFor(model => model.CentroDeCustoLancamento.Id)
+            </div>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Valor)<label>(Deixe o valor da mensalidade igual a 0 caso
+                queira que seja incluida uma mensalidade com valor padrão.)</label>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Valor, new { @class = "input-box", style = "width: 300px;" })
+        </div>
+        <p>
+            <input type="submit" id="gerar" value="Gerar" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Lista de Lançamentos", "Index", new { @idAssociado = Model.Associado.Id })
+</div>
+@section scripts{
+    $(function () {
+        $("#CentroCusto").focus(function () {
+            //if ($(this).val() == 'Encontre aqui...'){
+                    $('#CentroDeCustoLancamento_Id').val('');
+                    $(this).val('');
+            //    }
+        });
+
+        $("#CentroCusto").blur(function () {
+            if ($(this).val() == "")
+                $(this).val("Encontre aqui...");
+        });
+
+
+        function log(message, id) {
+            $('#CentroDeCustoLancamento_Id').val(message.id);
+        }
+
+        $('#gerar').click(function(){
+            $.blockUI({ message: 'Aguarde...'});
+        });
+
+        function preencherCampo(id) {
+            $('#CentroDeCustoLancamento_Id').val(id);
+            if(id == '')
+                $('#CentroCusto').val(id);
+
+        }
+
+
+        $('#CentroCusto').autocomplete({
+            minLength: 1,
+            autoFocus: true,
+            change: function(event, ui) {
+                if(ui.item == null)
+                    preencherCampo('')
+                else
+                    preencherCampo(ui.item.id);
+            },
+            delay: 500,
+            scroll: true,
+            select: function (event, ui) {
+                //log(ui.item, ui);
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Content("~/CentroDeCusto/RecuperarCentroCustoPor")',
+                    type: 'Post',
+                    dataType: "json",
+                    data: {
+                        descricao: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Descricao,
+                                value: item.Descricao,
+                                id: item.Id
+                            }
+                        }))
+                    }
+                })
+            }
+        })
+    });
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SoftSize.Ieed.ViewModels.ListaAssociadoModel>
+@{
+    ViewBag.Title = "Lista de Associados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Lista de Associados</h2>
+<p>
+    @Html.ActionLink("Novo Associado", "Create")
+</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="data-table">
+    <caption>
+        Associados
+    </caption>
+    <tr>
+        <th scope="col">
+        </th>
+        <th scope="col">
+            Nome
+        </th>
+        <th scope="col">
+            Email
+        </th>
+        <th scope="col">
+            AssociadoDetalheCPF
+        </th>
+    </tr>
+    @foreach (var item in Model.Where(m => m.Dependente == false))
+    {
+        <tr class="row-alternating">
+            <td scope="row" style="width: 100px">
+                @Html.ActionLink("Edit", "Edit", new { idAssociado = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { idAssociado = item.Id })
+            </td>
+            <td scope="row" style="width: 300px">
+                @item.Nome
+            </td>
+            <td scope="row" style="width: 300px">
+                @item.Email
+            </td>
+            <td scope="row" style="width: 100px">
+                @item.AssociadoDetalheCPF
+            </td>
+        </tr>
+        if (item.ListaAssociadoModels.Count > 0)
+        {
+        <tr>
+            <td colspan="4">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="data-table">
+                    @foreach (var subItem in item.ListaAssociadoModels)
+                    {
+                        <tr>
+                            <td scope="row" style="width: 100px">
+                                @Html.ActionLink("Edit", "Edit", new { idAssociado = subItem.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { idAssociado = subItem.Id })
+                            </td>
+                            <td scope="row" style="width: 300px">
+                                @subItem.Nome
+                            </td>
+                            <td scope="row" style="width: 300px">
+                                @subItem.Email
+                            </td>
+                            <td scope="row" style="width: 100px">
+                                @subItem.AssociadoDetalheCPF
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+        }
+
+    }
+</table>

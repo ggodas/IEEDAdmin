@@ -1,0 +1,10 @@
+﻿@model SoftSize.Ieed.ViewModels.AssociadoModel
+@{
+    ViewBag.Title = "Alteração de Associado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Alteração de Associado</h2>
+
+    @{Html.RenderPartial("~/Views/Associado/Associado.cshtml", ViewData.Model);}
+

@@ -1,0 +1,54 @@
+﻿@*@section declarationStyles{
+    <link href="@Url.Content("~/Content/themes/custom-theme/jquery-ui-1.8.14.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/custom-theme/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+}*@
+@section declarationScripts{
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    
+}
+
+@model CTF.Fidelidade.Premmia.ViewModel.ViewModels.DynamicView
+@{
+    ViewBag.Title = Model.TitleFilter;
+    Layout = Model.Layout;
+}
+<div id="tituloPagina">
+    @Model.TitleView</div>
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, null, Model.ActionMethod))
+{
+    @Html.HiddenFor(m => m.Id)
+    <table border="0" class="conteudo">
+        <tr>
+            <th colspan="4" align="center">
+                @Model.TitleFilter
+            </th>
+        </tr>
+        @{int count = 0;}
+        @foreach (var dynamicControlInView in Model.ControlsInView.Where(x => x.Type.ToLower() != "hidden").ToList())
+        {
+            <tr class="@(count % 2 == 0 ? "linhaVerdeClaro" : "linhaVerdeEscuro")">
+                <td align="left" class="labelFormulario">
+                    <label for="@dynamicControlInView.Name">@dynamicControlInView.Label</label>
+                </td>
+                <td align="left" class="informacaolFormulario">
+                    @{Html.RenderPartial(dynamicControlInView.TemplateControl, dynamicControlInView);}
+                </td>
+            </tr>
+                      count++;
+        }
+    </table>
+    foreach (var dynamicControlInViewHidden in Model.ControlsInView.Where(x => x.Type.ToLower() == "hidden").ToList())
+        {
+            { Html.RenderPartial(dynamicControlInViewHidden.TemplateControl, dynamicControlInViewHidden); }
+        }
+    <input type="submit" value="Ok" class="botao" />
+}
+<div id="divReport">
+</div>
+@section scripts{
+    @foreach (var dynamicControlInViewHidden in Model.ControlsInView.Where(x => x.Script != null && x.Script.Trim() != string.Empty).ToList())
+    {
+        @Html.Raw(dynamicControlInViewHidden.Script)
+    }
+}

@@ -1,0 +1,236 @@
+﻿@model SoftSize.Ieed.ViewModels.AssociadoModel
+@*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.meio.mask.js")" type="text/javascript" charset="utf-8"></script>*@
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.button.css")" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("Id", ViewData.Model.Id)
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Dados do Associado</legend>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.Nome)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Nome, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.NomeDeUsuario)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.NomeDeUsuario, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.NomeDeUsuario)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.Email, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        @if (!Model.PossuiDependentes)
+        {
+            <div>
+                <div>
+                    @Html.LabelFor(model => model.Dependente)
+                </div>
+                <div>
+                    @Html.DropDownListFor(model => model.Dependente,
+                    new SelectList(
+                        Model.Associados, "Id", "Nome"
+                    ), string.Empty, new { @class = "input-box" , style="width: 300px;" })
+                    @Html.ValidationMessageFor(model => model.Dependente)
+                </div>
+            </div>
+        }
+        <div>
+            <div>
+                @Html.LabelFor(model => model.MensalidadeCategoria)
+            </div>
+            <div>
+                @Html.DropDownListFor(model => model.MensalidadeCategoria,
+                    new SelectList(
+                        Model.CategoriasDeMensalidade, "Id", "Descricao"
+                    ), string.Empty, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.MensalidadeCategoria)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.GrauEspiritualAtual)
+            </div>
+            <div>
+                @Html.DropDownListFor(model => model.GrauEspiritualAtual,
+                    new SelectList(
+                        Model.GrausEspirituais, "Id", "Grau"
+             ), new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.GrauEspiritualAtual)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheProfissao)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheProfissao, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheProfissao)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheDataNascimento)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheDataNascimento, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheDataNascimento)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheNascionalidade)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheNascionalidade, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheNascionalidade)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheNomeMae)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheNomeMae, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheNomeMae)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheNomePai)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheNomePai, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheNomePai)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheGrauDeInstrucao)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheGrauDeInstrucao, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheGrauDeInstrucao)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheEstadoCivil)
+            </div>
+            <div>
+                @Html.DropDownListFor(model => model.AssociadoDetalheEstadoCivil,
+                    new SelectList(
+                 System.Enum.GetValues(typeof(SoftSize.Ieed.ViewModels.EstadoCivilEnum))
+                    ), new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheEstadoCivil)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheDocumentoTipo)
+            </div>
+            <div>
+                @Html.DropDownListFor(model => model.AssociadoDetalheDocumentoTipo,
+                    new SelectList(
+                 System.Enum.GetValues(typeof(SoftSize.Ieed.ViewModels.TipoDocumento))
+             ), new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheDocumentoTipo)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheDocumentoNumero)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheDocumentoNumero, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheDocumentoNumero)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheDocumentoDataEmissao)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheDocumentoDataEmissao, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheDocumentoDataEmissao)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheCPF)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.AssociadoDetalheCPF, new { alt = "cpf", @fMask = "cpf", @class = "input-box", style = "width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheCPF)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.EnderecoLogradouro)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.EnderecoLogradouro, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.EnderecoLogradouro)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.EnderecoCep)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.EnderecoCep, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.EnderecoCep)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.EnderecoCorrespondenciaLogradouro)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.EnderecoCorrespondenciaLogradouro, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.EnderecoCorrespondenciaLogradouro)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.EnderecoCorrespondenciaCep)
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.EnderecoCorrespondenciaCep, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.EnderecoCorrespondenciaCep)
+            </div>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(model => model.AssociadoDetalheObservacoes)
+            </div>
+            <div>
+                @Html.TextAreaFor(model => model.AssociadoDetalheObservacoes, new { @class = "input-box" , style="width: 300px;" })
+                @Html.ValidationMessageFor(model => model.AssociadoDetalheObservacoes)
+            </div>
+        </div>
+        <p>
+            <input type="submit" class="editor-submit" value="Salvar" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Voltar", "ListaAssociado")
+</div>

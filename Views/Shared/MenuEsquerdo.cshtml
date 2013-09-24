@@ -1,0 +1,52 @@
+﻿<ul>
+    @if (User.IsInRole("Associado"))
+    {
+        <li class="first">@Html.ActionLink("Associado", "ListaAssociado")
+            <ul>
+                @if (User.IsInRole("ListaAssociado"))
+                {
+                    <li>@Html.ActionLink("Lista de Associados", "ListaAssociado", "Associado")</li>
+                }
+                @if (User.IsInRole("AlteracaoAssociado"))
+                {
+                    <li>@Html.ActionLink("Alteração", "PesquisaDeAssociados", "Associado")</li>
+                }
+            </ul>
+        </li>
+    }
+    @if (User.IsInRole("Financeiro"))
+    {
+        <li><a href="#">Financeiro</a>
+            <ul>
+                @if (User.IsInRole("NovoLancamentoFinanceiro"))
+                {
+                    <li>@Html.ActionLink("Novo Lançamento", "Create", "Lancamento")</li>
+                }
+                @if (User.IsInRole("ConsultaFinanceiro"))
+                {
+                    <li>@Html.ActionLink("Consulta de Lançamentos", "Index", "Lancamento")</li>
+                }
+                @if (User.IsInRole("LancamentoDespesa"))
+                {
+                    <li>@Html.ActionLink("Lançamento de Despesa", "Despesa", "Lancamento")</li>
+                }
+                @if (User.IsInRole("LancamentoDoacao"))
+                {
+                    <li>@Html.ActionLink("Lançamento de Doação", "Doacao", "Lancamento")</li>
+                }
+                @if (User.IsInRole("LancamentoMensalidadeLote"))
+                {
+                    <li>@Html.ActionLink("Lançamento de Mensalidades em Lote", "LancamentoEmLote", "Lancamento")</li>
+                }
+                @if (User.IsInRole("LancamentoDeCerimonia"))
+                {
+                    <li>@Html.ActionLink("Lançamento de Cerimonia(para o Associado)", "Cerimonia", "Lancamento")</li>
+                }
+                @if (User.IsInRole("NovoCentroDeCusto"))
+                {
+                    <li>@Html.ActionLink("Novo Centro de Custo", "Create", "CentroDeCusto")</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

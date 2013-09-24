@@ -1,0 +1,129 @@
+﻿@model IEnumerable<SoftSize.Ieed.ViewModels.LancamentoModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Lista de Despesas
+</h2>
+<h1>
+</h1>
+<p>
+    @*    @Html.ActionLink("Incluir Mensalidade", "Create", new { idAssociado = @Model.Associado.Id })
+    &nbsp;|&nbsp;
+    @Html.ActionLink("Incluir Doação", "Create", new { idAssociado = @Model.Associado.Id })*@
+</p>
+<script type="text/javascript">
+    //    $(document).ready(function () {
+    //        $('#Pagar').click(function () {
+    //           
+
+    //            setTimeout($.unblockUI, 2000);
+    //        });
+    //    });
+
+    //    function abrirPopup() {
+    //        $.blockUI({
+    //            message: $('#divPagamento'),
+    //            position: 'static',
+    //            css: {
+    //                width: '700px',
+    //                border: '1px',
+    //                opacity: 0.85,
+    //                textAlign: 'center'
+    //            }
+    //        });
+    //    }
+
+</script>
+@if (Model != null)
+{
+    using (Html.BeginForm("ListaDespesa", "Lancamento"))
+    {
+        <select class="input-box" onchange="this.form.submit();" id="filtroMensalidade" name="filtroMensalidade"
+                style="width: 300px;">
+                <option value="0">Somente Não Pagas</option>
+                <option value="1">Todas</option>
+            </select>
+    <input type="hidden" id="idAssociado" name="idAssociado" value="@ViewBag.idAssociado" />
+    }
+    using (Html.BeginForm("Caixa", "Lancamento"))
+    {
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="data-table">
+        <caption>
+            
+            Lançamentos de Mensalidades Associado: e seus dependentes.
+        </caption>
+        <tr>
+            <th scope="col">
+                Centro de Custo
+            </th>
+            <th scope="col">
+                Data do Lançamento
+            </th>
+            <th scope="col">
+                Data do Vencimento
+            </th>
+            <th scope="col">
+                Data do Pagamento
+            </th>
+            <th scope="col">
+                Fornecedor
+            </th>
+            <th scope="col">
+                Valor
+            </th>
+            <th scope="col" style="text-align: center">
+                Pagar
+            </th>
+            @if (User.IsInRole("ExclusaoLancamento"))
+            {
+                <th scope="col">
+                </th>
+            }
+        </tr>
+        @foreach (var item in Model.OrderBy(m => m.DataLancamento))
+        {
+            <tr class="row-alternating">
+                <td scope="row" style="min-width: 50px; text-align: center">
+                    @string.Format("{0} - {1:dd/MM/yyyy}", @item.CentroDeCustoLancamento.Descricao, @item.CentroDeCustoLancamento.Data)
+                </td>
+                <td scope="row" style="min-width: 30px">
+                    @item.DataLancamento.ToString()
+                </td>
+                <td scope="row" style="min-width: 30px">
+                    @item.DataDeVencimento.ToString()
+                </td>
+                <td scope="row" style="min-width: 30px">
+                    @item.DataPagamento.ToString()
+                </td>
+                <td scope="row" style="width: 300px">
+                    @item.Fornecedor
+                </td>
+                <td scope="row" style="width: 100px; text-align: right;">
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td scope="row" style="width: 50px; text-align: center">
+                    @Html.CheckBox("LancamentoModelPagar", new { @value = item.Id })
+                </td>
+                @if (User.IsInRole("ExclusaoLancamento"))
+                {
+                    <td scope="row" style="min-width: 50px; text-align: center;">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+    <div style="height: 20px">
+    </div>
+ 
+        if (Model.Count() > 0 || Model.Count() > 0)
+        {
+    <input type="submit" id="Pagar" name="Pagar" class="Pagar" value="Pagar" />
+        }
+    }
+    <div id="divPagamento">
+    </div>
+
+}
