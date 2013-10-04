@@ -6,7 +6,7 @@ namespace SoftSize.Ieed.Model.FinanceiroModel.Lancamento
 {
     public class LancamentoMensalidade : LancamentoBase, ICredito
     {
-        protected LancamentoMensalidade():base(null)
+        public LancamentoMensalidade():base(null)
         {
             
         }

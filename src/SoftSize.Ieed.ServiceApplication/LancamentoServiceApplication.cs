@@ -92,7 +92,7 @@ namespace SoftSize.Ieed.ServiceApplication
         public void IncluirMensalidade(LancamentoModel mensalidadeModel)
         {
 
-            LancamentoMensalidade mensalidade = mensalidadeModel.ToMensalidade();
+            LancamentoMensalidade mensalidade = new LancamentoMensalidade();//mensalidadeModel.ToMensalidade();
             var associado = _associadoService.RecuperarAssociadoPor(mensalidadeModel.Associado.Id);
             mensalidade.Associado = associado;
             mensalidade.CentroDeCustoLancamento = centrosDeCusto.First(m => m.Id == mensalidadeModel.CentroDeCustoLancamento.Id);
@@ -106,7 +106,7 @@ namespace SoftSize.Ieed.ServiceApplication
         public void IncluirDoacao(LancamentoModel mensalidadeModel)
         {
 
-            LancamentoDoacao mensalidade = mensalidadeModel.ToDoacao();
+            LancamentoDoacao mensalidade = new LancamentoDoacao();//mensalidadeModel.ToDoacao();
             var associado = _associadoService.RecuperarAssociadoPor(mensalidadeModel.Associado.Id);
             mensalidade.Associado = associado;
             mensalidade.CentroDeCustoLancamento = centrosDeCusto.First(m => m.Id == mensalidadeModel.CentroDeCustoLancamento.Id);
@@ -120,7 +120,7 @@ namespace SoftSize.Ieed.ServiceApplication
 
         public void IncluirCerimonia(LancamentoCerimoniaModel cerimoniaModel)
         {
-            var lancamentoCerimonia = cerimoniaModel.ToLancamentoCerimonia();
+            var lancamentoCerimonia = new LancamentoCerimonia();// cerimoniaModel.ToLancamentoCerimonia();
 
             lancamentoCerimonia.CentroDeCustoLancamento = centrosDeCusto.First(m => m.Id == cerimoniaModel.CentroDeCustoLancamento.Id);
 

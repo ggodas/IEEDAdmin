@@ -76,7 +76,12 @@ namespace SoftSize.Ieed.ModelMapping.Configuration
 
 
             Mapper.CreateMap<LancamentoModel, LancamentoMensalidade>()
-                                .ForMember(dest => dest.DataLancamento, opt => opt.UseValue(DateTime.Now));
+                                .ForMember(dest => dest.DataLancamento, opt => opt.UseValue(DateTime.Now))
+                                .ForMember(dest => dest.Associado, opt => opt.MapFrom(src => src.Associado));
+
+            Mapper.CreateMap<LancamentoModel, LancamentoBase>()
+                    .ForMember(dest => dest.DataLancamento, opt => opt.UseValue(DateTime.Now));
+
 
             Mapper.CreateMap<LancamentoMensalidade, LancamentoModel>();
 

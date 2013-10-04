@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BalanceteIeed" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5953f46e-c790-4440-9b86-5a3724e59712">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="group" backcolor="#333333"/>
+	<queryString>
+		<![CDATA[select
+	l.Id,
+	l.DataLancamento,
+	cc.Descricao,
+	u.Nome,
+	l.Valor,
+	case
+		when not isnull(ld.LancamentoBase_id) then 'Doação'
+		when not isnull(lm.LancamentoBase_id) then 'Mensalidade'
+		when not isnull(lc.LancamentoBase_id) then 'Cerimonia'
+		when not isnull(ldes.LancamentoBase_id) then 'Despesa'
+	end as TipoLancamento,
+	if(isnull(ldes.LancamentoBase_id), 'Credito', 'Debito') as Tipo,
+	ldes.Observacao
+From Lancamento l
+left join LancamentoDoacao ld
+on l.Id = ld.LancamentoBase_id
+left join LancamentoMensalidade lm
+on l.Id = lm.LancamentoBase_id
+left join LancamentoCerimonia lc
+on l.Id = lc.LancamentoBase_id
+left join LancamentoDespesa ldes
+on l.Id = ldes.LancamentoBase_id
+left join Usuario u
+on u.Id = l.Associado_id
+left join CentroDeCustoLancamento cc
+on cc.Id = l.CentroDeCustoLancamento_id
+Order by Tipo, TipoLancamento, cc.Descricao;]]>
+	</queryString>
+	<field name="Id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DataLancamento" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TipoLancamento" class="java.lang.String"/>
+	<field name="Tipo" class="java.lang.String"/>
+	<field name="Observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Valor_2" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
+	</variable>
+	<variable name="Valor_3" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[( $F{Tipo} == "Credito" ? $F{Valor} : ($F{Valor} * -1))]]></variableExpression>
+	</variable>
+	<variable name="Valor_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Group" calculation="Sum">
+		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
+	</variable>
+	<group name="Group">
+		<groupExpression><![CDATA[$F{TipoLancamento} + $F{Tipo}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField pattern="dd/MM/yyyy">
+					<reportElement uuid="fdd8294a-c69b-453a-9fec-f90467e8c121" x="0" y="0" width="100" height="15"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DataLancamento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8f5ff3f-7fe4-44f1-9d3e-a06aaec81cc4" x="100" y="0" width="207" height="15"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Descricao}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="290370ef-bc26-4451-9d8f-21b4643410fc" x="307" y="0" width="100" height="15"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Tipo}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Group" pattern="¤ #,##0.00">
+					<reportElement uuid="8c1860be-8162-4376-9adf-4644a0219c2e" x="455" y="0" width="100" height="15"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[( $F{Tipo} == "Credito" ? $V{Valor_1} : ($V{Valor_1} * -1))]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement uuid="fb8c1a78-3c9a-4c69-a3a7-67043a0bfa63" x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DataLancamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="22dbaa07-161a-4a74-92c2-621b534d8d0c" x="100" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descricao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="998cf0be-824f-4d9b-835f-bf20c206bdd7" x="455" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7cebe6e-fe6b-4698-8d3d-c11c831cd4cf" x="307" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="20">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="145c2371-f9f2-4f0e-9206-badcde95cafd" x="455" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Valor_3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

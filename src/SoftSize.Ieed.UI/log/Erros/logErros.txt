@@ -332,3 +332,229 @@ System.InvalidOperationException: Sequence contains no matching element
    at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
    at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
    at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:03:11,958 [16] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:06:30,503 [24] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:10:45,884 [16] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:33:29,817 [10] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:42:00,281 [10] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 14:44:43,852 [5] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 15:12:28,020 [11] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+AutoMapper.AutoMapperMappingException: Trying to map SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade.
+Using mapping configuration for SoftSize.Ieed.ViewModels.LancamentoModel to SoftSize.Ieed.Model.FinanceiroModel.Lancamento.LancamentoMensalidade
+Exception of type 'AutoMapper.AutoMapperMappingException' was thrown. ---> System.InvalidCastException: Unable to cast object of type 'SoftSize.Ieed.ViewModels.AssociadoModel' to type 'SoftSize.Ieed.Model.UsuarioModel.Associado'.
+   at lambda_method(Closure , Object[] )
+   at AutoMapper.ConstructorMap.ResolveValue(ResolutionContext context)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.CreateObject(ResolutionContext context)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.NewObjectPropertyMapMappingStrategy.GetMappedObject(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at SoftSize.Ieed.ModelMapping.ExtensionsMappers.ToMensalidade(LancamentoModel lancamentoModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ModelMapping\ExtensionsMappers.cs:line 95
+   at SoftSize.Ieed.ServiceApplication.LancamentoServiceApplication.IncluirMensalidade(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.ServiceApplication\LancamentoServiceApplication.cs:line 95
+   at SoftSize.Ieed.UI.Controllers.LancamentoController.Create(LancamentoModel mensalidadeModel) in D:\git\IEEDAdmin\src\SoftSize.Ieed.UI\Controllers\LancamentoController.cs:line 78
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+2013-10-02 16:23:07,016 [14] ERROR SoftSize.Ieed.UI.Filters.Global.CustomExceptionAttribute [(null)] - 
+System.InvalidOperationException: Sequence contains no matching element
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at SoftSize.Ieed.ServiceApplication.AssociadoServiceApplication.IncluirAssociadoModel(AssociadoModel associadoModel)
+   at SoftSize.Ieed.UI.Controllers.AssociadoController.Create(AssociadoModel associado)
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)

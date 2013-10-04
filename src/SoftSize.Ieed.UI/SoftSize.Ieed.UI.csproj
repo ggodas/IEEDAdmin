@@ -15,10 +15,14 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxMin">
-      <HintPath>..\..\packages\AjaxMin.4.13.4076.28499\lib\AjaxMin.dll</HintPath>
+      <HintPath>..\..\..\..\TodosProjetosCTF\Projetos Temp\SoftSize.Ieed\packages\AjaxMin.4.13.4076.28499\lib\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
@@ -61,12 +65,6 @@
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -189,17 +187,9 @@
     <Compile Include="Filters\BaseActionFilter.cs" />
     <Compile Include="Filters\Global\CustomExceptionAttribute.cs" />
     <Compile Include="Filters\Global\HeaderClientFilterAttribute.cs" />
-    <Compile Include="FluxoDeCaixa.aspx.cs">
-      <DependentUpon>FluxoDeCaixa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FluxoDeCaixa.aspx.designer.cs">
-      <DependentUpon>FluxoDeCaixa.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="IEEDDataSet.Designer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -264,7 +254,6 @@
     <Content Include="Content\themes\redmond\jquery.ui.theme.css" />
     <Content Include="Content\token-input.css" />
     <Content Include="DynamicView.xml" />
-    <Content Include="FluxoDeCaixa.aspx" />
     <Content Include="Global.asax" />
     <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
@@ -458,6 +447,25 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.WebData.dll" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.xml" />
+    <None Include="_bin_deployableAssemblies\WebMatrix.Data.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Administration.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.xml" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.xml" />
+    <None Include="_bin_deployableAssemblies\NuGet.Core.dll" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -553,13 +561,6 @@
     <Content Include="Views\Lancamento\Doacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="IEEDDataSet.xsc">
-      <DependentUpon>IEEDDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="IEEDDataSet.xsd" />
-    <None Include="IEEDDataSet.xss">
-      <DependentUpon>IEEDDataSet.xsd</DependentUpon>
-    </None>
     <Content Include="Views\Lancamento\ListaDespesa.cshtml" />
     <Content Include="Views\Shared\PesquisaCentroCustos.cshtml" />
     <Content Include="Views\DynamicViews\Index.cshtml" />
